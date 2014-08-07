@@ -1,8 +1,9 @@
 import scrapy
-from scrapy.item import Word
+from scrapy.contrib.spiders.crawl import CrawlSpider
+from words.items import Word
 
 
-class AcademicSpider(scrapy.CrawlSpider):
+class AcademicSpider(CrawlSpider):
     name = 'AcademicSpider'
-    start_urls = ['http://www.oxfordlearnersdictionaries.com/wordlist/english/academic/sublist01/']
+    start_urls = ['http://www.oxfordlearnersdictionaries.com/wordlist/english/academic/']
     pass
