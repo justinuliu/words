@@ -24,7 +24,7 @@ class AcademicSpider(CrawlSpider):
             self.empty_defs = self.empty_defs + 1
         print 'empty words is %d' % self.empty_words
         print 'empty definition is %d' % self.empty_defs
-        print 'word is %s, definition is %s' % (word['head_word'], word['definition'])
+        yield word
 
     def parse(self, response):
         for url in response.selector.xpath("//ul/li/a[contains(.//text(),'sublist')]/@href").extract():
