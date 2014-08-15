@@ -29,6 +29,6 @@ class WordsPipeline(object):
                 c.execute('insert into words values(?)', (hw))
                 for i in range(len(item['definitions'])):
                     c.execute('insert into definitions values(?, ?, ?)',
-                            (item['head_word'][0], i+1, item['definitions'][i]))
+                              (item['head_word'][0], i+1, item['definitions'][i]))
                 conn.commit()
         return DropItem()
