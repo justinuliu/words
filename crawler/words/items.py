@@ -16,4 +16,4 @@ class WordsItem(scrapy.Item):
 
 class Word(scrapy.Item):
     head_word = scrapy.Field()
-    definition = scrapy.Field()
+    definitions = scrapy.Field()
