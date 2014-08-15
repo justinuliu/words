@@ -23,10 +23,12 @@ class WordsPipeline(object):
         '''Store them'''
         with sqlite3.connect(self.db_name) as conn:
             c = conn.cursor()
-            c.execute('insert into words values(?)', (item['head_word']))
-            for i in range(len(item['definitions'])):
-                c.execute('insert into definitions values(?, ?, ?)',
-                          (item['head_word'][0], i+1, item['definitions'][i]))
-            conn.commit()
-
+            hw = item['head_word']
+            c.execute('select * from words where head_word is ?', (hw))
+            if c.fetchone() is None:
+                c.execute('insert into words values(?)', (hw))
+                for i in range(len(item['definitions'])):
+                    c.execute('insert into definitions values(?, ?, ?)',
+                            (item['head_word'][0], i+1, item['definitions'][i]))
+                conn.commit()
         return DropItem()
