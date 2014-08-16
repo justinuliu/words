@@ -13,7 +13,15 @@ class WordsPipeline(object):
     '''Store words into sqlite'''
     def open_spider(self, spider):
         '''Initial database if needed'''
-        print 'open spider'
+        with sqlite3.connect(self.db_name) as conn:
+            c = conn.cursor()
+            c.execute('create table if not exists words'
+                      '(head_word varchar(30) primary key)')
+            c.execute('create table if not exists definitions'
+                      '(head_word varchar(30), definition varchar(300),'
+                      ' num integer, foreign key(head_word)'
+                      'references words(head_word));')
+            conn.commit()
 
     def close_spider(self, spider):
         '''Close connection to sqlite'''
